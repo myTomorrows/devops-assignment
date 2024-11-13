@@ -1,39 +1,34 @@
-import time
+from flask import Flask, jsonify
 import os
 
-import redis
-from flask import Flask
-
-from flask_basicauth import BasicAuth
-
-
 app = Flask(__name__)
-cache = redis.Redis(host=os.environ['REDIS_HOST'], port=os.environ['REDIS_PORT'])
 
-app.config['BASIC_AUTH_USERNAME'] = os.environ['USERNAME']
-app.config['BASIC_AUTH_PASSWORD'] = os.environ['PASSWORD']
+# Default route
+@app.route("/")
+def home():
+    return "Hello, this is a message from your Python app!"
 
-basic_auth = BasicAuth(app)
+# New route that uses secrets and configuration from environment variables
+@app.route("/config")
+def config():
+    # Retrieve sensitive and config values from environment variables
+    secret_key = os.getenv("SECRET_KEY")
+    db_password = os.getenv("DB_PASSWORD")
 
-def get_hit_count():
-    retries = 5
-    while True:
-        try:
-            return cache.incr('hits')
-        except redis.exceptions.ConnectionError as exc:
-            if retries == 0:
-                raise exc
-            retries -= 1
-            time.sleep(0.5)
+    # Retrieve non-sensitive config values from environment variables
+    api_base_url = os.getenv("API_BASE_URL")
+    log_level = os.getenv("LOG_LEVEL")
+    max_connections = os.getenv("MAX_CONNECTIONS")
+    
+    # Return the config information
+    return jsonify({
+        "message": "Config and secrets accessed",
+        "SECRET_KEY": secret_key,
+        "DB_PASSWORD": db_password,
+        "API_BASE_URL": api_base_url,
+        "LOG_LEVEL": log_level,
+        "MAX_CONNECTIONS": max_connections
+    })
 
-
-@app.route('/')
-def hello():
-    count = get_hit_count()
-    return 'Hello World! I have been seen {} times.\n'.format(count)
-
-@app.route('/supersecret')
-@basic_auth.required
-def secret_view():
-    count = get_hit_count()
-    return os.environ['THEBIGSECRET']+ '\n'
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
