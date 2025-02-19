@@ -1,0 +1,11 @@
+replicaCount: 2
+image:
+  repository: <your-dockerhub-username>/my-flask-app
+  tag: latest
+  pullPolicy: Always
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 5000
+env:
+  FLASK_ENV: production

@@ -27,7 +27,7 @@ This repository contains a basic Python Flask application that returns a string 
 - Please create a README.md:
     - Explaining how the code works, how to deploy the application and how to verify its successful deployment.
     - Explain the decisions made during the design and implementation of the solution.
-    - Explain the networking strategy you would adopt to deploy production ready applications on AWS. 
+    - Explain the networking strategy you would adopt to deploy production ready applications on AWS.
     - Describe how you would implement a solution to grant access to various AWS services to the deployed application.
     - Describe how would you automate deploying the solution across multiple environments using CI/CD.
     - Discuss any trade-offs considered when designing the solution.
@@ -40,3 +40,10 @@ This repository contains a basic Python Flask application that returns a string 
 - The Terraform code should be reusable and capable of being deployed to multiple environments, each with its own configuration.
 - An open-source monitoring solution can be deployed, providing basic observability for the application.
 - Adding a health check endpoint in the application, and using that in the deployments improving Availability.
+
+
+## How To
+
+### Docker Build & Push
+docker build -t <your-dockerhub-username>/mt-app:latest .
+docker push <your-dockerhub-username>/mt-app:latest
