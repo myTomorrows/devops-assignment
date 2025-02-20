@@ -1,9 +1,7 @@
 name: Docker Build
 run-name: Building docker
 on: [push]
-env:
-  image: "enriquefrade/mt-app"
-  tag : "latest"
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -21,4 +19,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: "${{image}}:${{tag}}"
+          tags: "enriquefrade/mt-app:latest"
