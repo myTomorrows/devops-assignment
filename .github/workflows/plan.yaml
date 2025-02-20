@@ -1,6 +1,10 @@
 name: PR Plan
 
-on: [push]
+push:
+    paths:
+      - 'helm/**'
+      - 'terraform/**'
+      - 'gihub/workflows/plan.yaml'
 
 permissions:
   contents: read
@@ -19,10 +23,6 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: eu-west-1
-
-      - name: Sts GetCallerIdentity
-        run: |
-          aws sts get-caller-identity
 
       - name: terraform plan
         uses: dflook/terraform-plan@v1

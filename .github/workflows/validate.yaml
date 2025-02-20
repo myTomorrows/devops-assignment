@@ -1,7 +1,11 @@
 name: Validate changes
 
 on:
-  push:
+  pull_request:
+    paths:
+      - 'helm/**'
+      - 'terraform/**'
+      - 'gihub/workflows/validate.yaml'
 
 jobs:
   fmt-check:

@@ -1,10 +1,17 @@
 name: Docker Build
 run-name: Building docker
-on: [push]
+on:
+  push:
+    paths:
+      - 'Dockerfile'
+      - 'app/**'
+      - 'gihub/workflows/build.yaml'
 
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env:
+     DOCKER_TAG: "enriquefrade/mt-app:latest"
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -19,4 +26,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: "enriquefrade/mt-app:latest"
+          tags: ${{ env.DOCKER_TAG }}

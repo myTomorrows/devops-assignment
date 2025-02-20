@@ -44,6 +44,22 @@ This repository contains a basic Python Flask application that returns a string 
 
 ## How To
 
-### Docker Build & Push
-docker build -t your-dockerhub-username/mt-app:latest .
-docker push your-dockerhub-username/mt-app:latest
+### Github -> AWS
+- Apply terraform locally from ```terraform/oidc``` folder to create OIDC connection to your aws account
+- Copy output variable to github secrets under the name ```AWS_ROLE_ARN```
+
+### pre-commit
+
+- install pre-commit following instructions https://pre-commit.com/#install
+
+###
+
+### Docker Build & Push locally
+- run at root folder: \
+```docker build -t <your-dockerhub-username>/mt-app:latest .``` \
+```docker push your-dockerhub-username/mt-app:latest```
+
+### Github Actions secrets
+```AWS_ROLE_ARN``` Role previous created for OIDC \
+```DOCKER_USERNAME``` User for Dockerhub \
+```DOCKER_HUB_AUTH``` Password for Dockerhub
