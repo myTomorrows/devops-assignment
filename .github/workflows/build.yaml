@@ -2,8 +2,8 @@ name: Docker Build
 run-name: Building docker
 on: [push]
 env:
-  image: enriquefrade/mt-app
-  tag : latest
+  image: "enriquefrade/mt-app"
+  tag : "latest"
 jobs:
   docker:
     runs-on: ubuntu-latest
