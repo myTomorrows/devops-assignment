@@ -1,10 +1,13 @@
 name: PR Plan
 
 on: [push]
+env:
+  AWS_REGION : eu-west-1
 
 permissions:
   contents: read
   pull-requests: write
+  id-token: write
 
 jobs:
   plan:
@@ -16,9 +19,9 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
-          role-to-assume: arn:aws:iam::959123875122:role/GitHubAction-AssumeRoleWithAction
+          role-to-assume: arn:aws:iam::959123875122:role/terraform-github
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
-          aws-region: eu-west-1
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Sts GetCallerIdentity
         run: |
