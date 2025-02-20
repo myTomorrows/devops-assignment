@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  repository: <your-dockerhub-username>/my-flask-app
+  repository: enriquefrade/mt-app
   tag: latest
   pullPolicy: Always
 service:

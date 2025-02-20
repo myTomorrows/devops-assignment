@@ -20,35 +20,21 @@ provider "helm" {
 }
 
 
-resource "helm_release" "flask_app" {
-  name      = "my-flask-app"
-  chart     = "./helm" # Path to the Helm chart
+resource "helm_release" "mt_app" {
+  name      = "mt-app"
+  chart     = "../helm/mt-app"
   namespace = "default"
   wait      = true
 
-  set {
-    name  = "replicaCount"
-    value = 2
-  }
-
-  set {
-    name  = "image.repository"
-    value = "<your-dockerhub-username>/my-flask-app"
-  }
-
-  set {
-    name  = "image.tag"
-    value = "latest"
-  }
 }
 
 module "network" {
   source = "./modules/network"
 
   environment         = var.environment
-  vpc_cidr            = "10.0.0.0/16"
-  public_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24"]
-  availability_zones  = ["eu-west-1a", "eu-west-1b"]
+  vpc_cidr            = var.vpc_cidr
+  public_subnet_cidrs = var.public_subnet_cidrs
+  availability_zones  = var.availability_zones
 }
 
 module "eks" {

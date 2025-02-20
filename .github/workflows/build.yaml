@@ -1,16 +1,24 @@
 name: Docker Build
-run-name: ${{ github.actor }} is Building
+run-name: Building docker
 on: [push]
+env:
+  image: enriquefrade/mt-app
+  tag : latest
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Build and push
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_AUTH }}
+
+      - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: "{{defaultContext}}:app"
           push: true
-          tags: user/app:latest
-          secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.MYTOKEN }}
+          tags: "${{image}}:${{tag}}"

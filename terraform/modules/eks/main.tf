@@ -15,7 +15,7 @@ locals {
 
 # Create an EKS cluster
 resource "aws_eks_cluster" "eks_cluster" {
-  name     = var.cluster_name
+  name     = local.cluster_name
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
@@ -29,30 +29,9 @@ resource "aws_eks_cluster" "eks_cluster" {
 }
 
 # Create an EKS node group
-resource "aws_eks_node_group" "eks_public_node_group" {
+resource "aws_eks_node_group" "eks_node_group" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
   node_group_name = "${local.cluster_name}-public-node-group"
-  node_role_arn   = aws_iam_role.eks_node_role.arn
-  subnet_ids      = var.subnet_ids
-
-  scaling_config {
-    desired_size = var.desired_size
-    max_size     = var.max_size
-    min_size     = var.min_size
-  }
-
-  depends_on = [
-    aws_iam_role_policy_attachment.eks_node_AmazonEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.eks_node_AmazonEC2ContainerRegistryReadOnly,
-    aws_iam_role_policy_attachment.eks_node_AmazonEKS_CNI_Policy,
-  ]
-}
-
-
-# Create an EKS node group
-resource "aws_eks_node_group" "eks_private_node_group" {
-  cluster_name    = aws_eks_cluster.eks_cluster.name
-  node_group_name = "${local.cluster_name}-private-node-group"
   node_role_arn   = aws_iam_role.eks_node_role.arn
   subnet_ids      = var.subnet_ids
 
