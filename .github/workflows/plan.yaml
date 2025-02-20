@@ -1,6 +1,7 @@
 name: PR Plan
 
-push:
+on:
+  push:
     paths:
       - 'helm/**'
       - 'terraform/**'
