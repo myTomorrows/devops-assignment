@@ -3,11 +3,6 @@ variable "environment" {
   type        = string
 }
 
-variable "subnet_ids" {
-  description = "List of subnet IDs for the EKS cluster"
-  type        = list(string)
-}
-
 variable "desired_size" {
   description = "Desired number of worker nodes"
   type        = number

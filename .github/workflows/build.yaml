@@ -1,0 +1,16 @@
+name: Docker Build
+run-name: ${{ github.actor }} is Building
+on: [push]
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: "{{defaultContext}}:app"
+          push: true
+          tags: user/app:latest
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.MYTOKEN }}
