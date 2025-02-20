@@ -45,5 +45,5 @@ This repository contains a basic Python Flask application that returns a string 
 ## How To
 
 ### Docker Build & Push
-docker build -t <your-dockerhub-username>/mt-app:latest .
-docker push <your-dockerhub-username>/mt-app:latest
+docker build -t your-dockerhub-username/mt-app:latest .
+docker push your-dockerhub-username/mt-app:latest
