@@ -7,7 +7,7 @@ variable "environment" {
 variable "desired_size" {
   description = "Desired number of worker nodes"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "max_size" {
@@ -39,4 +39,10 @@ variable "availability_zones" {
   description = "Availability zones"
   type        = list(string)
   default     = ["eu-west-1a", "eu-west-1b"]
+}
+
+variable "app_version" {
+  description = "App version"
+  type        = string
+  default     = "0.1"
 }

@@ -9,3 +9,9 @@ service:
   targetPort: 5000
 env:
   FLASK_ENV: production
+secrets:
+  apiBaseUrl: "null"
+  dbPassword: "null"
+  logLevel: "null"
+  maxConnections: "null"
+  secretKey: "null"

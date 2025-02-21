@@ -21,6 +21,31 @@ spec:
           env:
             - name: FLASK_ENV
               value: {{ .Values.env.FLASK_ENV | quote }}
+            - name: API_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: mt-app-secrets
+                  key: API_BASE_URL
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mt-app-secrets
+                  key: DB_PASSWORD
+            - name: LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: mt-app-secrets
+                  key: LOG_LEVEL
+            - name: MAX_CONNECTIONS
+              valueFrom:
+                secretKeyRef:
+                  name: mt-app-secrets
+                  key: MAX_CONNECTIONS
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mt-app-secrets
+                  key: SECRET_KEY
           livenessProbe:
             httpGet:
               path: /
