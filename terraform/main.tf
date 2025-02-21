@@ -1,12 +1,19 @@
 terraform {
+  backend "s3" {
+    bucket         = "my-terraform-state-bucket-mt-challenge"
+    key            = "dev.tfstate"
+    region         = "eu-west-1"
+    encrypt        = true
+    dynamodb_table = "my-lock-table-mt-challenge"
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0" # Adjust the version as needed
+      version = "~> 5.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 2.0" # Adjust the version as needed
+      version = "~> 2.0"
     }
 
     random = {
@@ -15,7 +22,7 @@ terraform {
     }
   }
 
-  required_version = ">= 1.0.0" # Adjust the Terraform version as needed
+  required_version = ">= 1.0.0"
 }
 
 resource "random_string" "API_BASE_URL" {
