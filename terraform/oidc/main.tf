@@ -75,7 +75,9 @@ resource "aws_iam_policy" "eks_cluster_creation_policy" {
           "iam:CreatePolicy",
           "iam:DeletePolicy",
           "iam:GetPolicy",
-          "iam:TagRole"
+          "iam:TagRole",
+          "iam:ListRolePolicies",
+          "iam:GetRolePolicy"
         ]
         Resource = "*"
       },
