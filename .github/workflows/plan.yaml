@@ -1,7 +1,7 @@
 name: PR Plan
 
 on:
-  push:
+  pull_request:
     paths:
       - 'helm/**'
       - 'terraform/**'
@@ -36,3 +36,13 @@ jobs:
           path: terraform
           var_file: terraform/env/${{ env.ENV }}.tfvars
           backend_config_file: terraform/env/backend/${{ env.ENV }}.tfvars
+
+      - name: Comment PR with Terraform Plan Output
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            ## Terraform Plan Output 🏗️
+            ```
+            ${{ steps.tf_plan.outputs.stdout }}
+            ```
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

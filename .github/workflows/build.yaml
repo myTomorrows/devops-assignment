@@ -1,7 +1,7 @@
 name: Docker Build
 run-name: Building docker
 on:
-  push:
+  pull_request:
     paths:
       - 'Dockerfile'
       - 'app/**'
@@ -11,10 +11,14 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     env:
-     DOCKER_TAG: "enriquefrade/mt-app:latest"
+     DOCKER_IMAGE: "enriquefrade/mt-app:"
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
+      - name: Determine Environment
+        id: env
+        run: |
+          echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -26,4 +30,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ env.DOCKER_TAG }}
+          tags: ${{ env.DOCKER_IMAGE}} ${{ env.DOCKER_TAG }}
