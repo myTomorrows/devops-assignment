@@ -19,6 +19,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Determine Environment
+        id: env
+        run: |
+          echo "ENV=${GITHUB_REF_NAME}" >> $GITHUB_ENV
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
@@ -30,4 +34,4 @@ jobs:
         with:
           path: terraform
           auto_approve: true
-          var_file: ${GITHUB_REF_NAME}.tfvars
+          var_file: ${{ env.ENV }}.tfvars
