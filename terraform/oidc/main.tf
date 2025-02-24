@@ -62,7 +62,8 @@ resource "aws_iam_policy" "eks_cluster_creation_policy" {
           "eks:TagResource",
           "eks:CreateNodegroup",
           "eks:DescribeNodegroup",
-          "eks:DeleteNodegroup"
+          "eks:DeleteNodegroup",
+          "eks:AccessKubernetesApi"
         ]
         Resource = "*"
       },
