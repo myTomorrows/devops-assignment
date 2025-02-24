@@ -1,4 +1,4 @@
-name: PR Plan
+name: PR apply
 
 on:
   push:
@@ -15,7 +15,7 @@ permissions:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    name: Create terraform plan
+    name: Create terraform apply
     steps:
       - name: Checkout
         uses: actions/checkout@v4
