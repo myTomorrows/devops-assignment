@@ -34,4 +34,5 @@ jobs:
         uses: dflook/terraform-plan@v1
         with:
           path: terraform
-          var_file: terraform/${{ env.ENV }}.tfvars
+          var_file: terraform/env/${{ env.ENV }}.tfvars
+          backend_config_file: terraform/env/backend/${{ env.ENV }}.tfvars

@@ -59,7 +59,10 @@ resource "aws_iam_policy" "eks_cluster_creation_policy" {
           "eks:DeleteCluster",
           "eks:ListClusters",
           "eks:UpdateClusterConfig",
-          "eks:TagResource"
+          "eks:TagResource",
+          "eks:CreateNodegroup",
+          "eks:DescribeNodegroup",
+          "eks:DeleteNodegroup"
         ]
         Resource = "*"
       },
@@ -78,7 +81,8 @@ resource "aws_iam_policy" "eks_cluster_creation_policy" {
           "iam:TagRole",
           "iam:ListRolePolicies",
           "iam:GetRolePolicy",
-          "iam:ListAttachedRolePolicies"
+          "iam:ListAttachedRolePolicies",
+          "iam:ListInstanceProfilesForRole"
         ]
         Resource = "*"
       },
@@ -110,7 +114,19 @@ resource "aws_iam_policy" "eks_cluster_creation_policy" {
           "ec2:DescribeRouteTables",
           "ec2:DescribeInstances",
           "ec2:DescribeTags",
-          "ec2:DescribeAddresses"
+          "ec2:DescribeAddresses",
+          "ec2:AllocateAddress",
+          "ec2:CreateTags",
+          "ec2:ModifyVpcAttribute",
+          "ec2:DescribeVpcAttribute",
+          "ec2:DescribeAddressesAttribute",
+          "ec2:ModifySubnetAttribute",
+          "ec2:ReleaseAddress",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:CreateNatGateway",
+          "ec2:DescribeNatGateways",
+          "ec2:DeleteNatGateway",
+
         ]
         Resource = "*"
       },
