@@ -5,7 +5,7 @@ on:
     paths:
       - 'helm/**'
       - 'terraform/**'
-      - 'gihub/workflows/plan.yaml'
+      - 'github/workflows/plan.yaml'
 
 permissions:
   contents: read

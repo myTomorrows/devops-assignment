@@ -5,7 +5,7 @@ on:
     paths:
       - 'helm/**'
       - 'terraform/**'
-      - 'gihub/workflows/validate.yaml'
+      - 'github/workflows/validate.yaml'
 
 jobs:
   fmt-check:
