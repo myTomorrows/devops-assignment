@@ -106,7 +106,8 @@ resource "aws_iam_policy" "eks_cluster_creation_policy" {
           "ec2:DescribeInternetGateways",
           "ec2:DescribeRouteTables",
           "ec2:DescribeInstances",
-          "ec2:DescribeTags"
+          "ec2:DescribeTags",
+          "ec2:DescribeAddresses"
         ]
         Resource = "*"
       },
@@ -143,4 +144,57 @@ resource "aws_iam_policy" "eks_cluster_creation_policy" {
 resource "aws_iam_role_policy_attachment" "github_actions_policy" {
   role       = aws_iam_role.github_actions_role.name
   policy_arn = aws_iam_policy.eks_cluster_creation_policy.arn
+}
+
+
+resource "aws_iam_role_policy_attachment" "s3_access" {
+  role       = aws_iam_role.github_actions_role.name
+  policy_arn = aws_iam_policy.s3_access_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "dynamodb_access" {
+  role       = aws_iam_role.github_actions_role.name
+  policy_arn = aws_iam_policy.dynamodb_access_policy.arn
+}
+
+resource "aws_iam_policy" "s3_access_policy" {
+  name        = "S3AccessPolicy"
+  description = "Policy for accessing the Terraform state bucket"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:ListBucket"
+        ]
+        Resource = [
+          "arn:aws:s3:::my-terraform-state-bucket-mt-challenge",
+          "arn:aws:s3:::my-terraform-state-bucket-mt-challenge/*"
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_policy" "dynamodb_access_policy" {
+  name        = "DynamoDBAccessPolicy"
+  description = "Policy for accessing the Terraform state lock table"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:DescribeTable"
+        ]
+        Resource = aws_dynamodb_table.terraform_locks.arn
+      }
+    ]
+  })
 }
