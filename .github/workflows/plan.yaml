@@ -22,7 +22,12 @@ jobs:
       - name: Determine Environment
         id: env
         run: |
-          echo "ENV=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          BRANCH_NAME=${GITHUB_REF_NAME}
+          if [[ "$BRANCH_NAME" == "main" ]]; then
+            echo "ENV=prd" >> $GITHUB_ENV
+          else
+            echo "ENV=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          fi
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0

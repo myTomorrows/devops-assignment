@@ -18,7 +18,12 @@ jobs:
       - name: Determine Environment
         id: env
         run: |
-          echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          BRANCH_NAME=${GITHUB_REF_NAME}
+          if [[ "$BRANCH_NAME" == "main" ]]; then
+            echo "TAG=latest" >> $GITHUB_ENV
+          else
+            echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          fi
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
