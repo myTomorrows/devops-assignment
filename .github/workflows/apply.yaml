@@ -25,9 +25,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: eu-west-1
 
-      - name: terraform plan
+      - name: Terraform Apply
         uses: dflook/terraform-apply@v1
         with:
           path: terraform
           auto_approve: true
-          var_file: "${GITHUB_REF_NAME}.tfvars"
+          var_file: ${GITHUB_REF_NAME}.tfvars
