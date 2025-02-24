@@ -5,7 +5,7 @@ on:
     paths:
       - 'Dockerfile'
       - 'app/**'
-      - 'github/workflows/build.yaml'
+      - '.github/workflows/build.yaml'
 
 jobs:
   docker:
