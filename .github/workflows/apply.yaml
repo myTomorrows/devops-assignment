@@ -34,4 +34,4 @@ jobs:
         with:
           path: terraform
           auto_approve: true
-          var_file: ${{ env.ENV }}.tfvars
+          var_file: terraform/${{ env.ENV }}.tfvars
