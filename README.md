@@ -10,7 +10,7 @@ This repository contains a basic Python Flask application that returns a string 
 
 ## Instructions
 
-- Create all the code and README's related to this task, in a new repository in your personal version control account.
+- Create all the code and READMEs related to this task in a new repository in your personal version control account.
 - Push all the code to the repository
 - Share the repository with us
 
@@ -25,11 +25,11 @@ This repository contains a basic Python Flask application that returns a string 
 - Avoid using hardcoded values in the Helm charts or Terraform code; instead, apply best practices such as using secrets, config maps, and variables wherever possible.
 - The Kubernetes cluster can be hosted on any platform of your choice (Minikube, Kind, or any cloud provider).
 - Please create a README.md:
-    - Explaining how the code works, how to deploy the application and how to verify its successful deployment.
+    - Explaining how the code works, how to deploy the application, and how to verify its successful deployment.
     - Explain the decisions made during the design and implementation of the solution.
-    - Explain the networking strategy you would adopt to deploy production ready applications on AWS. 
+    - Explain the networking strategy you would adopt to deploy production-ready applications on AWS. 
     - Describe how you would implement a solution to grant access to various AWS services to the deployed application.
-    - Describe how would you automate deploying the solution across multiple environments using CI/CD.
+    - Describe how you would automate deploying the solution across multiple environments using CI/CD.
     - Discuss any trade-offs considered when designing the solution.
     - Explain how scalability, availability, security, and fault tolerance are addressed in the solution.
     - Suggest any potential enhancements that could be made to improve the overall solution.
@@ -39,4 +39,4 @@ This repository contains a basic Python Flask application that returns a string 
 - The same Helm charts should be reusable to deploy across multiple environments, with different configurations for each.
 - The Terraform code should be reusable and capable of being deployed to multiple environments, each with its own configuration.
 - An open-source monitoring solution can be deployed, providing basic observability for the application.
-- Adding a health check endpoint in the application, and using that in the deployments improving Availability.
+- Adding a health check endpoint in the application, and using that in the deployments, improving Availability.
